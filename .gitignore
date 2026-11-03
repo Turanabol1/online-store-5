@@ -1,0 +1,13 @@
+# залежності та збірка
+node_modules/
+dist/
+*.tsbuildinfo
+coverage/
+
+# змінні оточення та логи
+.env
+*.log
+
+# IDE
+.idea/
+.vscode/

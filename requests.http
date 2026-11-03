@@ -1,0 +1,49 @@
+@baseUrl = http://localhost:3000
+
+### 1. Створення товару: у відповіді має з'явитись згенероване поле slug
+POST {{baseUrl}}/materials
+Content-Type: application/json
+
+{
+  "title": "Pro Laptop 16",
+  "price": 38,
+  "unitOfMeasure": "kg",
+  "weightPerUnitKg": 1,
+  "isHeavyCargo": false
+}
+
+### 2. Список товарів: два стартових (додані в OnModuleInit) + створений вище
+GET {{baseUrl}}/materials
+
+### 3. Замовлення з дійсним productId (пісок), очікується 201 Created
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "productId": "2",
+  "quantity": 2,
+  "customerEmail": "student@college.edu"
+}
+
+### 4. Замовлення з неіснуючим productId, очікується 404 Not Found
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "productId": "no-such-id",
+  "quantity": 1,
+  "customerEmail": "student@college.edu"
+}
+
+### 5. Некоректне замовлення (quantity 0, email без @), очікується 400 Bad Request
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "productId": "1",
+  "quantity": 0,
+  "customerEmail": "wrong"
+}
+
+### 6. Список оформлених замовлень
+GET {{baseUrl}}/orders
